@@ -2,7 +2,7 @@
 
 ## Usage
    Execute this script from project root with:<br />  
-	./CS1XA3/Project01/project_analyze<br />
+	**./CS1XA3/Project01/project_analyze**<br />
 
    Upon running the script, a menu will appear:<br />
 ```
@@ -34,7 +34,7 @@
 
 ## Feature 03
    **Description :** This feature displays all the files with occurence of the word "**#FIXME**". The file paths are stored
-		 in another file `fixme.log`. If the file "fixme.log" doesnt exsist, it is created and then the
+		 in another file **fixme.log**. If the file **fixme.log** doesnt exsist, it is created and then the
 		 then the feature is executed.<br />
    **Execution :**   Execute this feature by pressing "**3**" after running the script.<br />
    **Reference :**   Some of the code was refered from a few sites online [Can't find the sites]

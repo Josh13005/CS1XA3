@@ -47,7 +47,6 @@
 		 but not user executable permissions the file paths of those files are stored in `permissions.log`. If the user chooses to change file permissions, 
 		 the files are read from the log and user executable permissions are added to them . If the user chooses to restore the file back to its original
 		 permissions, the executable permissions are removed from the files present in the log file and the file returns to its original file permissions.<br />  
-<br />
    **Execution :** Execute this feature by pressing "**4**" after running the script. The user will be provided with two options. Enter "**1**" to change file permissions
 		   or "**2**" to restore the file back to its original file permissions.<br />
    **Reference :** Some of the code was refered from site : (https://stackoverflow.com/questions/2491985/find-all-writable-files-in-the-current-directory)

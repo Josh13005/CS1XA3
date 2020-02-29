@@ -34,14 +34,14 @@
 
 ## Feature 03
    **Description :** This feature displays all the files with occurence of the word "**#FIXME**". The file paths are stored
-		 in another file **fixme.log**. If the file **fixme.log** doesnt exsist, it is created and then the
+		 in another file `fixme.log`. If the file `fixme.log` doesnt exsist, it is created and then the
 		 then the feature is executed.<br />
    **Execution :**   Execute this feature by pressing "**3**" after running the script.<br />
    **Reference :**   Some of the code was refered from a few sites online [Can't find the sites]
 
 ## Feature 04
    **Description :** This feature searches the entire repository for `.sh` files and changes the file permissions for it. If file has user writable permissions
-		 but not user executable permissions the file paths of those files are stored in **permissions.log**. If the user chooses to change file permissions, 
+		 but not user executable permissions the file paths of those files are stored in `permissions.log`. If the user chooses to change file permissions, 
 		 the files are read from the log and user executable permissions are added to them . If the user chooses to restore the file back to its original permissions, the executable permissions are
 		 removed from the files present in the log file and the file returns to its original file permissions.<br />  
    **Execution :**	 Execute this feature by pressing "**4**" after running the script. The user will be provided with two options. Enter "**1**" to change file permissions
@@ -50,7 +50,7 @@
 
 ## Feature 05
    **Description :** This feature searches the entire repository for `.tmp` files and provides a backup or restores the files based on users choice. If the user
-		 chooses to backup those files, a directory, **backup** is created, all the `.tmp` file's file path is stored to **restore.log** and moved to the
+		 chooses to backup those files, a directory, `backup` is created, all the `.tmp` file's file path is stored to `restore.log` and moved to the
 		 backup directory. If the directory already exists, its content is deleted and then the files are moved to it. If the user chooses to restore the files,
 		 the files are moved from the backup directory to the its original path which is derived from the log file. the log file is later deleted and if the
 		 user restores the files again, an error is flagged `No files to backup`. The user is advised to keep the log file uncorrupted, as it would cause this
@@ -72,7 +72,7 @@
    **Description :** This feature changes the file permissions of the files based on the users choice. 
 		 The user will be asked to enter a file and file permissions for that file. If the file does not exist, an error message is
 		 printed `----N0 such file found----`. The bash script finds all the file path of the file provided by the user and stores them in
-		 **file.log**. Files are read from the log file and then the file permissions are changed by the user. The inputed file permissions
+		 `file.log`. Files are read from the log file and then the file permissions are changed by the user. The inputed file permissions
 		 should be octal file permissions. A brief octal conversion chart is provided if the user chooses to view it.<br />
    **Execution :**   Execute this feature by pressing "**7**" after running the script. Enter the file name and then the user has the choice to either view the 
 		 octal permission chart or Enter the file permissions.<br />

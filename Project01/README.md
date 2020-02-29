@@ -15,7 +15,8 @@
 	5) Backup and Delete / Restore
 	6) Group Same Extension of Files
 	7) Change File Permissions  
-	Enter your choice [1,2,3,4,5,6,7] : _  ```
+	Enter your choice [1,2,3,4,5,6,7] : _  
+```
 
 ## Feature 01
    Description : This feature lists all the files from each directory and their sizes in human readable format.

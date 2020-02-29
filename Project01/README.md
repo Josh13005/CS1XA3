@@ -5,8 +5,9 @@
 	./CS1XA3/Project01/project_analyze<br />
 
    Upon running the script, a menu will appear:<br />
-```	======================================
-		menu
+```
+	======================================
+		Menu
 	======================================
 	1) File Size List
 	2) File Type Count

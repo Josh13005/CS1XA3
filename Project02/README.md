@@ -1,4 +1,4 @@
-# CS 1XA3 Project01 - <**MyMacId>
+# CS 1XA3 Project01 - <**varugj1**>
 
 ## Overview
 	This webpage is <Joshua Sam Varughese>'s custom CV

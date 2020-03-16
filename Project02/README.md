@@ -2,8 +2,7 @@
 
 ## Overview
 	This webpage is <Joshua Sam Varughese>'s custom CV
-
-## Custom Javascript Code 
+ 
 ## Feature 01
   **Description :** This feature makes use of jquery to scroll down smoothly upon clicking the options in the nav
 		 bar. The page scrolls down smoothly to the part to which the user selects on the nav bar.<br />

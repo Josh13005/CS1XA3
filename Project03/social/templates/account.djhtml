@@ -9,6 +9,14 @@
                 <div class="w3-container w3-padding">
                     <h6 class="w3-opacity">Change Password</h6>
                     <!--                     TODO Objective 3: Add Password Change Form -->
+                        <form method="post" id="form" action="{% url 'social:account_view' %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" value="Submit" />
+                        </form>
+                        {% if failed %}
+                            <p style="color:red"> Unable To make changes </p>
+                        {% endif %}
                 </div>
             </div>
         </div>
@@ -19,6 +27,22 @@
                 <div class="w3-container w3-padding">
                     <h6 class="w3-opacity">Update Info</h6>
                     <!--                     TODO Objective 3: Add User Info Update Forms -->
+                    <form method="post" action="{% url 'social:account_view' %}">
+                            {% csrf_token %}
+                            Employment:<br>
+                            <input type = 'text' name='Employment' placeholder="your Employment" value = {{employ}} /><br>
+                            Location:<br>
+                            <input type = 'text' name='Location' placeholder="your Location" value = {{locat}} /><br>
+                            Birthday:<br>
+                            <input type = 'text' name='Birthday' placeholder="YYYY-MM-DD" value = {{birth}} /><br>
+                            Interests:<br>
+                            
+                            <input type = 'text' name='interest' placeholder="your Interest"/><br><br>
+                            <input type="submit" value="Save" />
+                        </form>
+                        {% if failed %}
+                            <p style="color:red"> Unable To make changes </p>
+                        {% endif %}
                 </div>
             </div>
         </div>

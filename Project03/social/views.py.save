@@ -20,13 +20,20 @@ def messages_view(request):
     """
     if request.user.is_authenticated:
         user_info = models.UserInfo.objects.get(user=request.user)
-        friends = list(user_info.friends.all())
- 
+        userfriends = list(user_info.friends.all())
+
+        allusers =  list(models.UserInfo.objects.all())
+        postusers = [] 
+        postusers.append(user_info)
+        for postuser in allusers:
+            if postuser in userfriends:
+                postusers.append(postuser) 
         # TODO Objective 9: query for posts (HINT only return posts needed to be displayed)
         posts = []
         
         
         for post in models.Post.objects.all().order_by('-timestamp'):
+            if post.owner in postusers:
                 posts.append(post)
         request.session['counter'] = request.session.get('counter',1)        
 
@@ -37,7 +44,7 @@ def messages_view(request):
 
         context = { 'user_info' : user_info,
                     'posts' : posts,
-                    'friends' : friends }
+                    'userfriends' : userfriends }
         return render(request,'messages.djhtml',context)
 
     request.session['failed'] = True
@@ -66,51 +73,43 @@ def account_view(request):
         user_info = models.UserInfo.objects.get(user=request.user)
         employ = user_info.employment
         locat = user_info.location
-        if user_info.birthday is not None:
-            birth = datetime.strftime(user_info.birthday, '%Y-%m-%d')
-        else:
-            birth = None
+        if user_info.birthday is not None:                                                               birth = datetime.strftime(user_info.birthday, '%Y-%m-%d')                                else:                                                                                            birth = ""   
         if request.method == 'POST':
             
-            emp = request.POST.get('Employment',employ)
+            emp = request.POST.get('Employment','user_info.employment')
             user_info.employment = emp 
             employ = user_info.employment 
 
             
-            loc = request.POST.get('Location',locat)
+            loc = request.POST.get('Location','user_info.location')
             user_info.location = loc 
             locat = user_info.location
 
-            bir = request.POST.get('Birthday',birth)
+            bir = request.POST.get('Birthday','None')
             user_info.birthday = bir
-            birth = user_info.birthday
 
-            intr = request.POST.get('interest',user_info.interests)
+            intr = request.POST.get('interest')
             if models.Interest.objects.filter(label__iexact=intr):
                 inst = models.Interest.objects.filter(label__iexact=intr)
             else:
                 inst = models.Interest.objects.create(label=intr)
-            var = inst
-            if user_info.interests is not None:
-                user_info.interests.add(inst)
+            user_info.interests.add(inst)
             
             user_info.save()
 
-        user_info = models.UserInfo.objects.get(user = request.user)
+        user_info = models.UserInfo.objects.get(user=request.user)
         if user_info.birthday is not None:
             birth = datetime.strftime(user_info.birthday, '%Y-%m-%d')
         else:
-            birth = None
-
-        if form.is_valid():
-            user_info.save()
+            birth = ""
+        if form.is_valid():   
             user = form.save()
         # TODO Objective 3: Create Forms and Handle POST to Update UserInfo / Password
 
             update_session_auth_hash(request, user)
             return redirect('login:login_view')
- 
-        else:
+        
+        else:   
             form = PasswordChangeForm(request.user)
         
         context = { 'user_info' : user_info,
@@ -146,13 +145,12 @@ def people_view(request):
         
         allfriends =  models.UserInfo.objects.exclude(user = user_info)
         all_people = []
-
+        #i = []
+        usrfriend = list(user_info.friends.all())
         #usrfriend =[models.UserInfo.objects.exclude(user=user_info)]
         for friend in allfriends:
-            if friend not in list(user_info.friends.all()):
+            if friend not in usrfriend:
                 all_people.append(friend)
-
-
         request.session['counter'] = request.session.get('counter',1)
         
             
@@ -161,19 +159,20 @@ def people_view(request):
         #user_id = models.UserInfo.objects.get(user_id=request.user.id)
         friend_requests = []
         frousrobj = models.UserInfo.objects.get(user=request.user)
-        for Req in models.FriendRequest.objects.filter(to_user=frousrobj).all():
-            if Req.from_user not in friend_requests:
-                reqlist = [Req.from_user]
+        for frReq in models.FriendRequest.objects.filter(to_user=frousrobj).all():
+            if frReq.from_user not in friend_requests:
+                reqlist = [frReq.from_user]
                 friend_requests += reqlist
 
 
          
                 
 
-        #data = request.POST.get('AD')
+        data = request.POST.get('AD')
         context = { 'user_info' : user_info,
                     'friend_requests' : friend_requests,
-                    'all_people' : all_people
+                    'all_people' : all_people,
+                    'data':data
                   }
 
         return render(request,'people.djhtml',context)
@@ -255,7 +254,6 @@ def more_post_view(request):
     '''
     if request.user.is_authenticated:
         # update the # of posts dispalyed
-
         request.session['counter'] = request.session['counter'] + 1
 
         # TODO Objective 9: update how many posts are displayed/returned by messages_view
@@ -280,7 +278,6 @@ def more_ppl_view(request):
 
         # TODO Objective 4: increment session variable for keeping track of num ppl displayed
     if request.user.is_authenticated:
-
         request.session['counter'] = request.session['counter'] + 1
          
             # return status='success'
@@ -309,9 +306,9 @@ def friend_request_view(request):
         if request.user.is_authenticated:
             # TODO Objective 5: add new entry to FriendRequest
             username = frID[3:]
-            frobj = models.UserInfo.objects.get(user = request.user)
-            toobj = models.UserInfo.objects.get(user_id = username)
-            models.FriendRequest.objects.create( to_user = toobj, from_user = frobj)
+            fro = models.UserInfo.objects.get(user = request.user)
+            to = models.UserInfo.objects.get(user_id = username)
+            models.FriendRequest.objects.create( to_user = to, from_user = fro)
 
 
             # return status='success'
@@ -344,13 +341,13 @@ def accept_decline_view(request):
         
 
         if request.user.is_authenticated:
-            toobj = models.UserInfo.objects.get(user = request.user)
-            frobj = models.UserInfo.objects.get(user_id = username)
-            inst = models.FriendRequest.objects.filter(to_user = toobj, from_user = frobj )
+            to = models.UserInfo.objects.get(user = request.user)
+            fro = models.UserInfo.objects.get(user_id = username)
+            inst = models.FriendRequest.objects.filter(to_user = to, from_user = fro )
             # TODO Objective 6: delete FriendRequest entry and update friends in both Users
             if AD[:1] == "A":
-                toobj.friends.add(frobj)
-                frobj.friends.add(toobj)
+                to.friends.add(fro)
+                fro.friends.add(to)
                 inst.delete()
             else:
                 inst.delete()

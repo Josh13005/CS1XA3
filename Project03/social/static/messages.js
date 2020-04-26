@@ -2,7 +2,29 @@
    | Handle Submitting Posts - called by $('#post-button').click(submitPost)
    ********************************************************************************************
    */
+function postResponse(data,status) {
+    if (status == 'success') {
+        location.reload();
+    }
+    else {
+        alert('Failed to submit post' + status);
+    }
+
+} 
+
+
 function submitPost(event) {
+    let postContent = $('#post-text').text()
+    let json_data = {'postContent': postContent  };
+
+    let url_path = post_submit_url;
+    console.log("yes")
+    console.log($('#post-text').text())
+
+    // AJAX post
+    $.post(url_path,
+           json_data,
+           postResponse);
     alert('Post Button Pressed');
     // TODO Objective 8: send contents of post-text via AJAX Post to post_submit_view (reload page upon success)
 }

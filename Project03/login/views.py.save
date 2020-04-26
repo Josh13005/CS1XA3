@@ -79,7 +79,6 @@ def create_signup_view(request):
           user = authenticate(username=username, password=raw_password)
          
           login(request, user)
-          return redirect('social:messages_view')
-
+          return redirect('social:messages_view'
   request.session['signup_failed'] = True
   return redirect('login:signup_view')

@@ -17,7 +17,7 @@
 
       <!-- TODO Objective 9: Display Posts using posts list -->
       {% for pos in posts %}
-        {% if forloop.counter0 < request.session.counter%}
+        {% if forloop.counter0 < request.session.counterr%}
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
             {% load static %}
             <img src="{% static 'avatar.png'  %}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">

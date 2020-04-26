@@ -34,10 +34,7 @@
                             Location:<br>
                             <input type = 'text' name='Location' placeholder="your Location" value = {{locat}} /><br>
                             Birthday:<br>
-                            <input type = 'text' name='Birthday' placeholder="YYYY-MM-DD" value = {{birth}} /><br>
-                            Interests:<br>
-                            
-                            <input type = 'text' name='interest' placeholder="your Interest"/><br><br>
+                            <input type = 'text' name='Birthday' placeholder="YYYY-MM-DD" value = {{birth}} /><br><br>
                             <input type="submit" value="Save" />
                         </form>
                         {% if failed %}

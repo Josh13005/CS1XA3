@@ -28,7 +28,7 @@ def messages_view(request):
         
         for post in models.Post.objects.all().order_by('-timestamp'):
                 posts.append(post)
-        request.session['counterr'] = request.session.get('counterr',1)        
+        request.session['counter'] = request.session.get('counter',1)        
 
 
 
@@ -66,6 +66,7 @@ def account_view(request):
         user_info = models.UserInfo.objects.get(user=request.user)
         employ = user_info.employment
         locat = user_info.location
+        
         if user_info.birthday is not None:
             birth = datetime.strftime(user_info.birthday, '%Y-%m-%d')
         else:
@@ -85,13 +86,25 @@ def account_view(request):
             user_info.birthday = bir
             birth = user_info.birthday
 
+            intr = request.POST.get('interest',user_info.interests)
+            if models.Interest.objects.filter(label__iexact=intr):
+                inst = models.Interest.objects.filter(label__iexact=intr)
+            else:
+                inst = models.Interest.objects.create(label=intr)
+            var = inst
+            i
+                user_info.interests.add(inst)
             
             user_info.save()
 
         user_info = models.UserInfo.objects.get(user = request.user)
+        #if user_info.birthday is not None:
+         #   birth = datetime.strftime(user_info.birthday, '%Y-%m-%d')
+        #else:
+        #    birth = ""
 
         if form.is_valid():
-          #  user_info.save()
+            user_info.save()
             user = form.save()
         # TODO Objective 3: Create Forms and Handle POST to Update UserInfo / Password
 
@@ -244,7 +257,7 @@ def more_post_view(request):
     if request.user.is_authenticated:
         # update the # of posts dispalyed
 
-        request.session['counterr'] = request.session['counterr'] + 1
+        request.session['counter'] = request.session['counter'] + 1
 
         # TODO Objective 9: update how many posts are displayed/returned by messages_view
 

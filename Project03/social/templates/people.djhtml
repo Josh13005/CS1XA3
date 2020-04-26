@@ -17,8 +17,6 @@
                     <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{people.location}} </p>
                     <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{people.birthday}} </p>
                 <!-- TODO Objective 5: make id unique to username and disable button if friend request already sent -->
-                    <h4>{{friend_requests}}</h4>
-                    <h4>{{people.user_id}}</h4>
                     <button onClick="this.disable=True;"type="button" id="fr-{{people.user_id}}" class="w3-button w3-theme-d1 w3-margin-bottom fr-button">Friend Request</button>
                 </div>
             {% endif%}
@@ -39,7 +37,6 @@
           <span>{{req.user}}</span>
           <div class="w3-row w3-opacity">
             <div class="w3-half">
-            {{req.user}}
                 <!-- TODO Objective 6: make id specific to user who sent request -->
                 <button onClick="this.disable=true;" type="button" id="A-{{req.user_id}}" class="w3-button w3-block w3-green w3-section acceptdecline-button" title="Accept">
                     <i class="fa fa-check"></i></button>

@@ -6,7 +6,7 @@
     <!-- TODO Objective 1: implement signup form -->
     <form method="post" id="signup_form" action="{% url 'login:create_signup_view' %}">
         {% csrf_token %}
-        {{ signup_form }}
+        {{ signup_form.as_p }}
         <input type="submit" value="Submit" />
   </form>
   {% if signup_failed %}

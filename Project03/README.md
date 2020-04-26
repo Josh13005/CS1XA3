@@ -11,7 +11,7 @@ $ python manage.py runserver localhost:8000
 ```
 Run on mac1xa3.ca with:
 ```
-python manage.py runserver localhost:10106
+$ python manage.py runserver localhost:10106
 ```
 Log in with testuser[1-6]:
 ```
